@@ -5,11 +5,13 @@ const pulse1 = document.getElementById('pulse1');
 const pulse2 = document.getElementById('pulse2');
 
 let skipRequested = false;
+let audioStarted = false;
 
+// Mostrar contenido y detener audio/ondas
 function startSite() {
   if (skipRequested) return;
-
   skipRequested = true;
+
   intro.style.display = 'none';
   content.style.display = 'block';
   document.body.style.overflow = 'auto';
@@ -20,6 +22,7 @@ function startSite() {
   } catch (e) {}
 }
 
+// Ondas al ritmo del audio
 function setupAudioReactive() {
   const context = new (window.AudioContext || window.webkitAudioContext)();
   const src = context.createMediaElementSource(audio);
@@ -51,27 +54,31 @@ function setupAudioReactive() {
   animate();
 }
 
-function handleStart() {
-  if (skipRequested) return;
+// Iniciar audio y ondas
+function startIntro() {
+  if (audioStarted) return;
+  audioStarted = true;
 
   audio.play().then(() => {
     setupAudioReactive();
 
-    // Cuando termine el audio, entrar a la web
+    // Cuando termine el audio, entrar
     audio.addEventListener('ended', startSite);
 
-    // Como backup, entrar cuando el audio alcance su duración real
+    // Fallback por si no se lanza ended
     setTimeout(() => {
       if (!skipRequested) startSite();
-    }, (audio.duration || 6) * 1000); // Fallback: 6s si no se puede leer la duración
+    }, (audio.duration || 6) * 1000);
   }).catch((err) => {
-    console.warn("No se pudo reproducir el audio automáticamente:", err);
-    startSite(); // fallback
+    console.warn("Error al reproducir audio:", err);
+    startSite(); // fallback sin audio
   });
 }
 
-// Lanzar todo al primer clic, tecla o toque
+// Entrada por interacción (clic/tecla/touch) SOLO activa el audio
 ['click', 'keydown', 'touchstart'].forEach(event => {
-  window.addEventListener(event, handleStart, { once: true });
-  window.addEventListener(event, startSite, { once: true });
+  window.addEventListener(event, startIntro, { once: true });
 });
+
+// Entrada manual extra (doble clic, por si no responde)
+document.addEventListener('dblclick', startSite);
