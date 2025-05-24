@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset='utf-8'>
     <title>Karaoke Godness</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
-     <!-- Contenedor de animación de entrada -->
-  <div class="intro">
-    <img src="img/gif_calvo.gif" alt="Mi Logo" class="logo">
-  </div>
+    <!-- Contenedor de animación de entrada -->
+    <div class="intro-container">
+        <div class="overlay"></div>
+        <div class="logo"></div>
+        <audio id="intro-audio" autoplay>
+            <source src="intro.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
   <!-- Tu contenido -->
   <div class="contenido" style="display: none;">
