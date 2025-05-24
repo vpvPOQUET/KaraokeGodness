@@ -22,10 +22,10 @@ function setupAudioReactive() {
 
   function animate() {
     analyser.getByteFrequencyData(dataArray);
-    const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
+    const average = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
 
     const scale = 1 + average / 100;
-    const opacity = Math.min(1, average / 150);
+    const opacity = Math.min(1, average / 120);
 
     pulse1.style.transform = `translate(-50%, -50%) scale(${scale})`;
     pulse2.style.transform = `translate(-50%, -50%) scale(${scale * 1.3})`;
@@ -39,12 +39,12 @@ function setupAudioReactive() {
   animate();
 }
 
-window.addEventListener('load', () => {
-  audio.muted = false;
+window.addEventListener('click', () => {
   audio.play().then(() => {
     setupAudioReactive();
     setTimeout(startSite, 6000);
-  }).catch(() => {
-    setTimeout(startSite, 6000);
+  }).catch(err => {
+    console.error('Error al reproducir audio:', err);
+    startSite(); // fallback
   });
-});
+}, { once: true });
