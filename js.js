@@ -5,6 +5,7 @@ const pulse1 = document.getElementById('pulse1');
 const pulse2 = document.getElementById('pulse2');
 
 let skipRequested = false;
+let animacionFalsaActiva = false;
 
 function startSite() {
   if (skipRequested) return;
@@ -51,28 +52,47 @@ function setupAudioReactive() {
   animate();
 }
 
-// 👇 Truco para lanzar play() lo antes posible
-function intentarIniciarAudio() {
-  // Esperamos a que el navegador dé permiso al menos 1 frame
-  requestAnimationFrame(() => {
-    audio.play().then(() => {
-      setupAudioReactive();
-      audio.addEventListener('ended', startSite);
-    }).catch((err) => {
-      console.warn("Autoplay con sonido bloqueado por el navegador:", err);
-      // Si falla, puedes mostrar un texto tipo "haz clic para empezar"
-    });
+function animacionFalsaOndas() {
+  let t = 0;
+  animacionFalsaActiva = true;
 
-    // Fallback por duración
-    setTimeout(() => {
-      if (!skipRequested) startSite();
-    }, 8000); // o audio.duration * 1000 si se conoce
-  });
+  function fakeAnimate() {
+    if (skipRequested || !animacionFalsaActiva) return;
+
+    const scale = 1 + Math.sin(t) * 0.2;
+    const opacity = 0.4 + Math.sin(t) * 0.2;
+
+    pulse1.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    pulse2.style.transform = `translate(-50%, -50%) scale(${scale * 1.2})`;
+
+    pulse1.style.opacity = opacity;
+    pulse2.style.opacity = opacity * 0.8;
+
+    t += 0.1;
+    requestAnimationFrame(fakeAnimate);
+  }
+
+  fakeAnimate();
 }
 
-window.addEventListener('load', intentarIniciarAudio);
+window.addEventListener('load', () => {
+  try {
+    audio.play().then(() => {
+      // Autoplay con sonido permitido
+      setupAudioReactive();
+      audio.addEventListener('ended', startSite);
+    }).catch(err => {
+      console.warn("Autoplay bloqueado. Activando animación falsa.");
+      animacionFalsaOndas();
+      setTimeout(startSite, 7000);
+    });
+  } catch (e) {
+    animacionFalsaOndas();
+    setTimeout(startSite, 7000);
+  }
+});
 
-// También permitir salir con clic, tecla, touch
+// Permitir salto manual por clic, tecla, toque
 ['click', 'keydown', 'touchstart'].forEach(evt =>
   window.addEventListener(evt, startSite)
 );
