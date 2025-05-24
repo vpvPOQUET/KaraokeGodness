@@ -6,31 +6,17 @@ body {
   overflow: hidden;
 }
 
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  text-align: center;
-  background: #fff;
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 1rem 0;
-  z-index: 10000;
-  font-family: 'Courier New', monospace;
-  border-bottom: 1px solid #ccc;
-}
-
 .intro-container {
   position: fixed;
   inset: 0;
   background: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   z-index: 9999;
   overflow: hidden;
-  padding-top: 4rem; /* espacio para la cabecera */
+  text-align: center;
 }
 
 .logo {
@@ -41,13 +27,23 @@ body {
   opacity: 1;
   transition: opacity 2s ease-out;
   z-index: 2;
-  animation: pulse 1.5s infinite ease-in-out;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+.intro-title {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  font-family: 'Courier New', monospace;
+  animation: blink 1s infinite;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 2s ease-out;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
 .wave {
@@ -57,7 +53,12 @@ body {
   background: radial-gradient(circle, rgba(125, 79, 244, 0.3) 0%, rgba(125, 79, 244, 0) 70%);
   border-radius: 50%;
   z-index: 1;
-  animation: expandWave 3s ease-out forwards;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wave.expand {
+  animation: expandWave 2s ease-out forwards;
 }
 
 @keyframes expandWave {
@@ -74,7 +75,7 @@ body {
 .main-content {
   display: none;
   text-align: center;
-  padding: 6rem 1rem 2rem; /* espacio para cabecera */
+  padding: 6rem 1rem 2rem;
   animation: fadeIn 1s ease-out forwards;
 }
 
@@ -99,5 +100,8 @@ body {
   .logo {
     width: 80vw;
     max-width: 250px;
+  }
+  .intro-title {
+    font-size: 1.2rem;
   }
 }

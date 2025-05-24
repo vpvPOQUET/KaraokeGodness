@@ -1,26 +1,24 @@
 window.addEventListener('load', () => {
   const intro = document.getElementById('intro-container');
   const logo = document.getElementById('logo');
+  const wave = document.querySelector('.wave');
+  const title = document.querySelector('.intro-title');
   const content = document.getElementById('main-content');
 
-  // Inicia desvanecimiento del logo tras 1s
-  setTimeout(() => {
+  function mostrarContenido() {
+    wave.classList.add('expand');
     logo.style.opacity = 0;
-  }, 1000);
+    title.style.opacity = 0;
 
-  // Muestra el contenido tras la animación de onda (3s)
-  setTimeout(() => {
-    intro.style.display = 'none';
-    content.style.display = 'block';
-    document.body.style.overflow = 'auto';
-  }, 3000);
-
-  // Permitir que un clic o tecla también revele el contenido antes
-  ['click', 'keydown', 'touchstart'].forEach(evt => {
-    window.addEventListener(evt, () => {
+    setTimeout(() => {
       intro.style.display = 'none';
       content.style.display = 'block';
       document.body.style.overflow = 'auto';
-    }, { once: true });
+    }, 2000);
+  }
+
+  // Mostrar contenido al hacer clic, tecla o toque
+  ['click', 'keydown', 'touchstart'].forEach(evt => {
+    window.addEventListener(evt, mostrarContenido, { once: true });
   });
 });
