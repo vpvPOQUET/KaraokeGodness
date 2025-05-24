@@ -51,51 +51,28 @@ function setupAudioReactive() {
   animate();
 }
 
-function iniciarAnimacionYAudio() {
-  try {
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          // Audio permitido automáticamente
-          setupAudioReactive();
-          audio.addEventListener('ended', startSite);
-        })
-        .catch(() => {
-          // Autoplay bloqueado: pedir clic al usuario
-          mostrarBotonManual();
-        });
-    }
-  } catch (e) {
-    mostrarBotonManual();
-  }
-}
-
-function mostrarBotonManual() {
-  const boton = document.createElement('button');
-  boton.textContent = 'Iniciar experiencia';
-  boton.style.position = 'fixed';
-  boton.style.top = '50%';
-  boton.style.left = '50%';
-  boton.style.transform = 'translate(-50%, -50%)';
-  boton.style.padding = '1rem 2rem';
-  boton.style.fontSize = '16px';
-  boton.style.zIndex = '10000';
-  boton.onclick = () => {
-    boton.remove();
+// 👇 Truco para lanzar play() lo antes posible
+function intentarIniciarAudio() {
+  // Esperamos a que el navegador dé permiso al menos 1 frame
+  requestAnimationFrame(() => {
     audio.play().then(() => {
       setupAudioReactive();
       audio.addEventListener('ended', startSite);
+    }).catch((err) => {
+      console.warn("Autoplay con sonido bloqueado por el navegador:", err);
+      // Si falla, puedes mostrar un texto tipo "haz clic para empezar"
     });
-  };
-  document.body.appendChild(boton);
+
+    // Fallback por duración
+    setTimeout(() => {
+      if (!skipRequested) startSite();
+    }, 8000); // o audio.duration * 1000 si se conoce
+  });
 }
 
-window.addEventListener('load', () => {
-  iniciarAnimacionYAudio();
-});
+window.addEventListener('load', intentarIniciarAudio);
 
-// Permitir que el usuario la salte en cualquier momento
-['click', 'keydown', 'touchstart'].forEach(event => {
-  window.addEventListener(event, startSite);
-});
+// También permitir salir con clic, tecla, touch
+['click', 'keydown', 'touchstart'].forEach(evt =>
+  window.addEventListener(evt, startSite)
+);
