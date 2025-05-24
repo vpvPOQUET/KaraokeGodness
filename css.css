@@ -7,6 +7,7 @@
   align-items: center;
   z-index: 9999;
   backdrop-filter: blur(10px);
+  cursor: pointer;
 }
 
 .logo-container {
@@ -18,7 +19,7 @@
 .logo {
   width: 100%;
   height: 100%;
-  background-image: url('img/logo.png'); /* tu logo */
+  background-image: url('img/logo.png'); /* Tu logo */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -33,7 +34,6 @@
   100% { transform: scale(1); filter: hue-rotate(0deg); }
 }
 
-/* Ondas circulares */
 .pulse {
   position: absolute;
   top: 50%;
@@ -48,13 +48,8 @@
   opacity: 0.5;
 }
 
-.pulse.delay1 {
-  animation-delay: 0.5s;
-}
-
-.pulse.delay2 {
-  animation-delay: 1s;
-}
+.pulse.delay1 { animation-delay: 0.5s; }
+.pulse.delay2 { animation-delay: 1s; }
 
 @keyframes pulseWave {
   0% {
@@ -67,10 +62,23 @@
   }
 }
 
+.click-text {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  color: #333;
+  font-family: 'Press Start 2P', cursive;
+  z-index: 3;
+}
+
 audio {
   display: none;
 }
 
 .main-content {
   display: none;
+  padding: 2rem;
+  text-align: center;
 }

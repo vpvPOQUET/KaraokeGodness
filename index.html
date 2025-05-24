@@ -1,37 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Karaoke Godness</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
-    <link rel="stylesheet" href="css.css">
-</head>
-<body>
-    <!-- Contenedor de animación de entrada -->
-    <div class="intro-container">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" />
+    <link rel="stylesheet" href="css.css" />
+  </head>
+  <body>
+    <div class="intro-container" id="intro-container">
       <div class="logo-container">
         <div class="logo"></div>
         <div class="pulse"></div>
         <div class="pulse delay1"></div>
         <div class="pulse delay2"></div>
+        <div class="click-text">Haz clic para entrar</div>
       </div>
-      <audio id="intro-audio" autoplay>
+      <audio id="intro-audio">
         <source src="img/audio.mp3" type="audio/mpeg" />
       </audio>
-  </div>
+    </div>
 
-  <!-- Tu contenido -->
-  <div class="contenido" style="display: none;">
-    <h1>Karaoke Godness</h1>
-    <h3>Que mala pata...</h3>
-    <h3>no tienes ni un pelo de tonto </h3>
-    <img src="img/gif_calvo.gif" alt="Calvo.com">
-  </div>
+    <!-- Tu contenido -->
+    <div class="main-content">
+      <h1>Karaoke Godness</h1>
+      <h3>Que mala pata...</h3>
+      <h3>no tienes ni un pelo de tonto </h3>
+      <img src="img/gif_calvo.gif" alt="Calvo.com">
+    </div>
 
-  <script src="js.js"></script>
-    
-
-</body>
+    <script src="js.js"></script>
+  </body>
 </html>
