@@ -4,10 +4,20 @@ const content = document.querySelector('.main-content');
 const pulse1 = document.getElementById('pulse1');
 const pulse2 = document.getElementById('pulse2');
 
+let skipRequested = false;
+
 function startSite() {
+  if (skipRequested) return;
+
+  skipRequested = true;
   intro.style.display = 'none';
   content.style.display = 'block';
   document.body.style.overflow = 'auto';
+
+  try {
+    audio.pause();
+    audio.currentTime = 0;
+  } catch (e) {}
 }
 
 function setupAudioReactive() {
@@ -21,6 +31,8 @@ function setupAudioReactive() {
   const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
   function animate() {
+    if (skipRequested) return;
+
     analyser.getByteFrequencyData(dataArray);
     const average = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
 
@@ -39,12 +51,27 @@ function setupAudioReactive() {
   animate();
 }
 
-window.addEventListener('click', () => {
+function handleStart() {
+  if (skipRequested) return;
+
   audio.play().then(() => {
     setupAudioReactive();
-    setTimeout(startSite, 6000);
-  }).catch(err => {
-    console.error('Error al reproducir audio:', err);
+
+    // Cuando termine el audio, entrar a la web
+    audio.addEventListener('ended', startSite);
+
+    // Como backup, entrar cuando el audio alcance su duración real
+    setTimeout(() => {
+      if (!skipRequested) startSite();
+    }, (audio.duration || 6) * 1000); // Fallback: 6s si no se puede leer la duración
+  }).catch((err) => {
+    console.warn("No se pudo reproducir el audio automáticamente:", err);
     startSite(); // fallback
   });
-}, { once: true });
+}
+
+// Lanzar todo al primer clic, tecla o toque
+['click', 'keydown', 'touchstart'].forEach(event => {
+  window.addEventListener(event, handleStart, { once: true });
+  window.addEventListener(event, startSite, { once: true });
+});
