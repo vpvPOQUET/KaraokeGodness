@@ -1,15 +1,53 @@
+/* css.css */
+:root {
+  --color-bg: #fdfcf9;
+  --color-text: #1e1e1e;
+  --color-accent: #4a4f3e;
+  --color-primary: #d4af37;
+  --color-soft: #f4f4ec;
+  --color-border: #cccccc;
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.05);
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+/* Header fijo */
+#seccion1 {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: white;
-  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#seccion1 .logo img{
+  width: 40%;
+  height: auto;
+}
+
+#seccion1 .titulo1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--color-accent);
 }
 
 .intro-container {
   position: fixed;
   inset: 0;
-  background: white;
+  background: var(--color-bg);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,21 +57,11 @@ body {
   text-align: center;
 }
 
-.logo {
-  width: 60vw;
-  max-width: 300px;
-  height: auto;
-  object-fit: contain;
-  opacity: 1;
-  transition: opacity 2s ease-out;
-  z-index: 2;
-}
-
 .intro-title {
   margin-top: 1rem;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: var(--color-accent);
   font-family: 'Courier New', monospace;
   animation: blink 1s infinite;
   z-index: 2;
@@ -50,7 +78,7 @@ body {
   position: absolute;
   width: 100px;
   height: 100px;
-  background: radial-gradient(circle, rgba(125, 79, 244, 0.3) 0%, rgba(125, 79, 244, 0) 70%);
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0) 70%);
   border-radius: 50%;
   z-index: 1;
   opacity: 0;
@@ -74,16 +102,14 @@ body {
 
 .main-content {
   display: none;
-  text-align: center;
-  padding: 6rem 1rem 2rem;
   animation: fadeIn 1s ease-out forwards;
+  background-color: var(--color-soft);
 }
 
-.main-content img {
-  margin-top: 20px;
-  max-width: 90vw;
-  height: auto;
+.main-content-body {
+  padding: 2rem;
 }
+
 
 @keyframes fadeIn {
   from {
@@ -96,11 +122,73 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+.seccion {
+  background-color: white;
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--card-shadow);
+  margin-bottom: 2rem;
+}
+
+.seccion.flex-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  background-color: var(--color-bg);
+  box-shadow: none;
+  border: none;
+}
+
+.seccion.flex-pair > div {
+  flex: 1 1 300px;
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--card-shadow);
+  border: 1px solid var(--color-border);
+  text-align: left;
+  max-width: 480px;
+}
+
+h1, h2, h3 {
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+ul li {
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+#seccion6 > .pie {
+  flex: 1 1 100%;
+  white-space: pre-line;
+}
+
+.imagen img {
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .seccion.flex-pair > div {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
   .logo {
     width: 80vw;
     max-width: 250px;
   }
+
   .intro-title {
     font-size: 1.2rem;
   }
