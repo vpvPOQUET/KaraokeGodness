@@ -5,7 +5,7 @@ const pulse1 = document.getElementById('pulse1');
 const pulse2 = document.getElementById('pulse2');
 
 let skipRequested = false;
-let animacionFalsaActiva = false;
+let audioActivated = false;
 
 function startSite() {
   if (skipRequested) return;
@@ -54,10 +54,8 @@ function setupAudioReactive() {
 
 function animacionFalsaOndas() {
   let t = 0;
-  animacionFalsaActiva = true;
-
   function fakeAnimate() {
-    if (skipRequested || !animacionFalsaActiva) return;
+    if (skipRequested || audioActivated) return;
 
     const scale = 1 + Math.sin(t) * 0.2;
     const opacity = 0.4 + Math.sin(t) * 0.2;
@@ -71,28 +69,46 @@ function animacionFalsaOndas() {
     t += 0.1;
     requestAnimationFrame(fakeAnimate);
   }
-
   fakeAnimate();
 }
 
+// 1. Empezamos con animación falsa
 window.addEventListener('load', () => {
-  try {
-    audio.play().then(() => {
-      // Autoplay con sonido permitido
-      setupAudioReactive();
-      audio.addEventListener('ended', startSite);
-    }).catch(err => {
-      console.warn("Autoplay bloqueado. Activando animación falsa.");
-      animacionFalsaOndas();
-      setTimeout(startSite, 7000);
-    });
-  } catch (e) {
-    animacionFalsaOndas();
-    setTimeout(startSite, 7000);
-  }
+  animacionFalsaOndas();
 });
 
-// Permitir salto manual por clic, tecla, toque
+// 2. Al primer clic / tecla / toque: reiniciar audio con sonido real
+function activarAudioReal() {
+  if (audioActivated) return;
+  audioActivated = true;
+
+  audio.muted = false;
+  audio.currentTime = 0;
+
+  audio.play().then(() => {
+    setupAudioReactive();
+    audio.addEventListener('ended', startSite);
+  }).catch(() => {
+    setTimeout(startSite, 7000);
+  });
+
+  // También iniciar temporizador de seguridad
+  setTimeout(() => {
+    if (!skipRequested) startSite();
+  }, 8000);
+}
+
+// 3. Si el usuario no interactúa, mostramos contenido tras 8s
+setTimeout(() => {
+  if (!skipRequested && !audioActivated) {
+    startSite();
+  }
+}, 8000);
+
+// 4. Detectar interacción para activar sonido real
+['click', 'keydown', 'touchstart'].forEach(evt =>
+  window.addEventListener(evt, activarAudioReal, { once: true })
+);
 ['click', 'keydown', 'touchstart'].forEach(evt =>
   window.addEventListener(evt, startSite)
 );
