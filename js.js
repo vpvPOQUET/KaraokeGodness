@@ -5,9 +5,7 @@ const pulse1 = document.getElementById('pulse1');
 const pulse2 = document.getElementById('pulse2');
 
 let skipRequested = false;
-let audioStarted = false;
 
-// Mostrar contenido y detener audio/ondas
 function startSite() {
   if (skipRequested) return;
   skipRequested = true;
@@ -22,7 +20,6 @@ function startSite() {
   } catch (e) {}
 }
 
-// Ondas al ritmo del audio
 function setupAudioReactive() {
   const context = new (window.AudioContext || window.webkitAudioContext)();
   const src = context.createMediaElementSource(audio);
@@ -54,31 +51,51 @@ function setupAudioReactive() {
   animate();
 }
 
-// Iniciar audio y ondas
-function startIntro() {
-  if (audioStarted) return;
-  audioStarted = true;
-
-  audio.play().then(() => {
-    setupAudioReactive();
-
-    // Cuando termine el audio, entrar
-    audio.addEventListener('ended', startSite);
-
-    // Fallback por si no se lanza ended
-    setTimeout(() => {
-      if (!skipRequested) startSite();
-    }, (audio.duration || 6) * 1000);
-  }).catch((err) => {
-    console.warn("Error al reproducir audio:", err);
-    startSite(); // fallback sin audio
-  });
+function iniciarAnimacionYAudio() {
+  try {
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Audio permitido automáticamente
+          setupAudioReactive();
+          audio.addEventListener('ended', startSite);
+        })
+        .catch(() => {
+          // Autoplay bloqueado: pedir clic al usuario
+          mostrarBotonManual();
+        });
+    }
+  } catch (e) {
+    mostrarBotonManual();
+  }
 }
 
-// Entrada por interacción (clic/tecla/touch) SOLO activa el audio
-['click', 'keydown', 'touchstart'].forEach(event => {
-  window.addEventListener(event, startIntro, { once: true });
+function mostrarBotonManual() {
+  const boton = document.createElement('button');
+  boton.textContent = 'Iniciar experiencia';
+  boton.style.position = 'fixed';
+  boton.style.top = '50%';
+  boton.style.left = '50%';
+  boton.style.transform = 'translate(-50%, -50%)';
+  boton.style.padding = '1rem 2rem';
+  boton.style.fontSize = '16px';
+  boton.style.zIndex = '10000';
+  boton.onclick = () => {
+    boton.remove();
+    audio.play().then(() => {
+      setupAudioReactive();
+      audio.addEventListener('ended', startSite);
+    });
+  };
+  document.body.appendChild(boton);
+}
+
+window.addEventListener('load', () => {
+  iniciarAnimacionYAudio();
 });
 
-// Entrada manual extra (doble clic, por si no responde)
-document.addEventListener('dblclick', startSite);
+// Permitir que el usuario la salte en cualquier momento
+['click', 'keydown', 'touchstart'].forEach(event => {
+  window.addEventListener(event, startSite);
+});
