@@ -1,95 +1,319 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
   <title>Karaoke Godness</title>
-  <link rel="stylesheet" href="css.css" />
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+ <link rel="icon" type="image/png" href="images/2.png">
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+  <style>
+ .llista-paragraf {
+  padding: 1em;
+  border-left: 4px solid #d4af37;
+}
+
+.llista-paragraf span {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.llista-paragraf strong {
+    font-size: 1.3em;
+  display: block;
+  font-weight: bold;
+  color: #4a4f3e;
+}
+
+/* Variante alineada a la dreta */
+.llista-paragraf.dreta {
+  text-align: right;
+  border-left: none;
+  border-right: 4px solid #d4af37;
+}
+.scroll-animada {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.scroll-animada.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
 </head>
+
 <body>
-  <!-- Intro animada -->
-  <div class="intro-container" id="intro-container">
-    <div class="wave"></div>
-    <img src="img/logo.png" class="logo" id="logo" alt="Logo Karaoke Godness" />
-    <div class="intro-title">Karaoke Godness</div>
-  </div>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+          <a class="navbar-brand" href="index.html">
+            <img src="images/logo.png" alt="" />
+            <span>
+              Karaoke Godness
+            </span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-  <!-- Contenido principal estructurado -->
-  <div class="main-content" id="main-content">
-    <div class="seccion" id="seccion1">
-      <div class="logo">
-        <img src="img/logo1.png" alt="Logo">
+          
+        </nav>
       </div>
-      <div class="titulo1">
-        <h1>Karaoke Godness</h1>
+    </header>
+    <!-- end header section -->
+    <!-- hero section -->
+    <section class="hero_section">
+      <div class="hero_detail">
+        <h1>
+          <span>
+           L'espai fet per a tu ...
+          </span>
+          <span>
+             
+          </span>
+          <span>
+            
+          </span>
+          <span>
+            
+          </span>
+          <span>
+           
+          </span>
+          <span>
+          </span>
+        </h1>
+        <h3>
+          T'ESPEREM !!!
+          </h2>
+      </div>
+      <div class="hero_btn-box">
+        <a href="#contacte">
+          Contacta'ns
+        </a>
+      </div>
+    </section>
+    <!-- end hero section -->
+  </div>
+  <!-- end hero area -->
+
+
+  <!-- about section -->
+  <section class="about_section layout_padding scroll-animada">
+    <div class="about_container">
+      <div class="container">
+        <div class="detail">
+          
+          <p class="llista-paragraf">
+            <strong>Per a qui?</strong>
+            <span> - Gaudi d’un bon karaoke</span>
+            <span> - Festejar moments</span>
+            <span> - Gaudir d'un bon menjar<span>
+            <span> - Espai personalitzat</span>
+            <span> - Explotar el teu potencial</span>
+            <span> - TOTS I TOTES QUE VULGUI <br>
+              GAUDIR D'UN ESPAI PRIVAT</span>
+          </p>
+        </div>
+        <div class="detail-2">
+          <p class="llista-paragraf dreta">
+          <strong>Què oferim?</strong>
+          <span> - Sales privades</span>
+          <span> - Equips audiovisuals d’alta qualitat</span>
+          <span> - Espais adaptats comodes i privats</span>
+          <span> - Servei d’hostaleria</span>
+          <span> - Aplicació privada i única</span>
+          <span> - Participació en concursos</span>
+        </p>
+        </div>
       </div>
     </div>
-    <div class="main-content-body" id="main-content-body">
-      <div class="seccion" id="seccion2">
-        <div class="titulo2"><h2>L'espai fet per a tu...</h2></div>
-      </div>
+  </section>
 
-      <div class="seccion" id="seccion3">
-        <div class="titulo3"><h2>T'ESPEREM!</h2></div>
-      </div>
 
-      <div class="seccion" id="seccion4">
-        <div class="texto1">
-          <h3>Per a qui?</h3>
-          <ul>
-            <li>Gaudir d'un bon karaoke</li>
-            <li>Escollir moments</li>
-            <li>Gaudir d'un bon àpat</li>
-            <li>Espais personalitzats</li>
-            <li>Temps de qualitat amb amics</li>
-            <li>Relaxar-te i desconnectar</li>
-            <li>Tot això i més... VOLS GAUDIR D'UN ESPAI PRIVAT</li>
-          </ul>
-        </div>
-        <div class="texto2">
-          <h3>Què oferim?</h3>
-          <ul>
-            <li>Sales privades</li>
-            <li>Equip audiovisual de qualitat</li>
-            <li>Àpats i begudes</li>
-            <li>Espais adaptats segons el grup i la mida</li>
-            <li>Servei d'hostaleria</li>
-            <li>Aplicació pròpia</li>
-            <li>Participació en concursos</li>
-          </ul>
-        </div>
-      </div>
+  <!-- end about section -->
 
-      <div class="seccion" id="seccion5">
-        <div class="texto3">
-          <h3>Nosaltres som:</h3>
-          <ul>
-            <li>S.P <img src="img/icon1.png" alt="icon" width="20"></li>
-            <li>S.M <img src="img/icon2.png" alt="icon" width="20"></li>
-            <li>S.G <img src="img/icon3.png" alt="icon" width="20"></li>
-            <li>S.E <img src="img/icon4.png" alt="icon" width="20"></li>
-          </ul>
-        </div>
-        <div class="imagen">
-          <img src="img/persona.png" alt="persona dibuixada">
-        </div>
+  <!-- product section -->
+  <section class="product_section layout_padding scroll-animada">
+    <div class="d-flex justify-content-center">
+      <h2 class="custom_heading">
+        Les nostres sales
+      </h2>
+    </div>
+    <div class="container layout_padding2">
+      <div class="img-box box-1">
+        <img src="images/p-1.png" alt="">
       </div>
-
-      <div class="seccion" id="seccion6">
-        <div class="pie">
-          <h3>Contacta amb nosaltres</h3>
-          <ul>
-            <li>Consultes</li>
-            <li>Dubtes</li>
-            <li>Activitats</li>
-            <li>Motius</li>
-          </ul>
-          <p><strong>WhatsApp</strong> <img src="img/ws.png" alt="WhatsApp" width="20"></p>
-        </div>
+      <div class="img-box box-2">
+        <img src="images/p-2.png" alt="">
+      </div>
+      <div class="img-box box-3">
+        <img src="images/p-3.png" alt="">
+      </div>
+      <div class="img-box box-4">
+        <img src="images/p-4.png" alt="">
       </div>
     </div>
-  </div>
+  </section>
 
-  <script src="js.js"></script>
+
+  <!-- end product section -->
+
+  <!-- why section -->
+
+  <section class="why_section layout_padding scroll-animada">
+    <div class="container">
+      <div class="d-flex flex-column align-items-center text-center">
+        <h2 class="custom_heading ">
+          Per què ens trien
+        </h2>
+        <p class="">
+          A Karaoke Godness trobaràs un espai privat, insonoritzat i versàtil per desconnectar, cantar,
+          retrobar-te amb amics, relaxar-te o fins i tot concentrar-te i treballar, sempre al teu aire,
+          en un ambient còmode i acollidor.
+        </p>
+      </div>
+    </div>
+    <div class="why_container my-4">
+      <div class="img_box">
+        <img src="images/why-img.png" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- end why section -->
+
+
+
+  <!-- contact section -->
+
+  <section id="contacte" class="contact_section layout_padding scroll-animada">
+    <div class="container">
+      <div class="col-md-6">
+        <div class="d-flex mb-4 ml-4 ml-md-0">
+          <h2 class="custom_heading text-center">
+            Contacta'ns
+          </h2>
+        </div>
+        <form action="">
+          <div>
+            <input type="text" placeholder="Nom" />
+          </div>
+          <div>
+            <input type="email" placeholder="Correu electrònic" />
+          </div>
+          <div>
+            <input type="text" placeholder="Número de telèfon" />
+          </div>
+          <div>
+            <input type="text" class="message-box" placeholder="Missatge" />
+          </div>
+          <div class="d-flex justify-content-center mt-4 ">
+            <button>
+              ENVIA
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- info section -->
+  <section class="info_section layout_padding scroll-animada">
+    <div class="container layout_padding-top  layout_padding2-bottom">
+      <div class="info_items">
+        <a href="https://www.google.es/maps/place/Rda.+de+Jean+Monnet,+510,+08205+Sabadell,+Barcelona/@41.5497504,2.0764739,16z/data=!3m1!4b1!4m6!3m5!1s0x12a4948efeb0b47f:0x4f3563f763676f60!8m2!3d41.5497504!4d2.0790488!16s%2Fg%2F11c5cyy_4r?hl=es&entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+          <div class="item ">
+            <div class="img-box box-1">
+              <img src="images/location-white.png" alt="" />
+            </div>
+            <div class="detail-box">
+              <p>
+                510 Rda. de Jean Monnet, Sabadell
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="https://mail.google.com/mail/u/0/#inbox?compose=DmwnWrRttFrNjDfwBxvKPFGlbcTPhCHRdcZWdTSTBFcXCfcHwcxsgBWmMlCRNWwBLgcscKvBTKZL" target="_blank">
+          <div class="item ">
+            <div class="img-box box-3">
+              <img src="images/envelope-white.png" alt="" />
+            </div>
+            <div class="detail-box">
+              <p>
+                info.karaokegodness@gmail.com
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="https://web.whatsapp.com/" target="_blank">
+          <div class="item ">
+            <div class="img-box box-2">
+              <img src="images/telephone-white.png" alt="" />
+            </div>
+            <div class="detail-box">
+              <p>
+                +34 666666666
+              </p>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- end info_section -->
+
+  <!-- footer section -->
+  <section class="container-fluid footer_section scroll-animada">
+    <p>
+      &copy; 2025
+    </p>
+  </section>
+  <!-- footer section -->
+
+  <script>
+  const observador = new IntersectionObserver((entrades) => {
+    entrades.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('.scroll-animada').forEach((seccio) => {
+    observador.observe(seccio);
+  });
+</script>
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
+
 </html>
